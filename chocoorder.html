@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Your Favorite Drinks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .product {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .product h2 {
+            margin: 0 0 10px;
+        }
+        .quantity-input, .location-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .order-button {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #25d366;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            text-align: center;
+        }
+        .order-button:hover {
+            background-color: #1ebd5a;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Order Your Favorite Drinks</h1>
+
+<div class="product">
+    <h2>Don Commodre</h2>
+    <input type="number" id="quantity-doncommodre" class="quantity-input" placeholder="Enter quantity" min="1">
+    <input type="text" id="location-doncommodre" class="location-input" placeholder="Enter your location">
+    <a href="#" onclick="placeOrder('Don Commodre')" class="order-button">Order Now</a>
+</div>
+
+<div class="product">
+    <h2>Tikana</h2>
+    <input type="number" id="quantity-tikana" class="quantity-input" placeholder="Enter quantity" min="1">
+    <input type="text" id="location-tikana" class="location-input" placeholder="Enter your location">
+    <a href="#" onclick="placeOrder('Tikana')" class="order-button">Order Now</a>
+</div>
+
+<div class="product">
+    <h2>Bossman</h2>
+    <input type="number" id="quantity-bossman" class="quantity-input" placeholder="Enter quantity" min="1">
+    <input type="text" id="location-bossman" class="location-input" placeholder="Enter your location">
+    <a href="#" onclick="placeOrder('Bossman')" class="order-button">Order Now</a>
+</div>
+
+<script>
+    function placeOrder(product) {
+        // Get the quantity and location inputs based on the product
+        const quantityInput = document.getElementById('quantity-' + product.toLowerCase().replace(' ', ''));
+        const locationInput = document.getElementById('location-' + product.toLowerCase().replace(' ', ''));
+
+        const quantity = quantityInput.value;
+        const location = locationInput.value.trim();
+
+        if (!quantity || quantity <= 0) {
+            alert('Please enter a valid quantity for ' + product + '.');
+            return;
+        }
+
+        if (!location) {
+            alert('Please enter your location.');
+            return;
+        }
+
+        // Construct the WhatsApp message
+        const message = encodeURIComponent(`I would like to order ${quantity} ${product}(s). My location is: ${location}.`);
+        const phoneNumber = '2349069650531'; // WhatsApp number in international format without '+' sign
+
+        // Open WhatsApp with the pre-filled message
+        window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
